@@ -1,4 +1,4 @@
-name: Weather App CI
+name: Weather App CI and Deploy
 
 on:
   push:
@@ -28,10 +28,40 @@ jobs:
 
       - name: Run the backend server
         run: |
-          python backend/server.py &
+          python backend/server.py & 
           sleep 5  # Attendre que le serveur soit lancé
 
       - name: Test server
         run: |
           curl -s http://127.0.0.1:5000/ > /dev/null
           curl -s -X POST -d "city=Paris" http://127.0.0.1:5000/weather > result.html
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Build the app (copier les fichiers frontend)
+        run: |
+          mkdir -p build
+          cp frontend/form.html build/
+          cp frontend/result.html build/
+
+          - name: Deploy to GitHub Pages
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            personal_token: ${{ secrets.GITHUB_TOKEN }}
+            branch: gh-pages
+            folder: build
