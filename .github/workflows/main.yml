@@ -57,7 +57,7 @@ jobs:
         run: |
           mkdir -p build
           cp frontend/form.html build/
-          cp frontend/result.html build/
+          cp frontend/results.html build/
 
           - name: Deploy to GitHub Pages
           uses: peaceiris/actions-gh-pages@v3
