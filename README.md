@@ -21,8 +21,16 @@ This is a simple weather app that allows users to check the current weather for 
    ```bash
    python backend/server.py
    ```
-4. Open a web browser and navigate to http://localhost:8000/form to access the city input form.
-5. Results will be displayed on the corresponding results page.
+4. Install the necessary Python dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+5. Start the Python server:
+   ```bash
+   python backend/server.py
+   ```
+6. Open a web browser and navigate to http://localhost:5000/form to access the city input form.
+7. Results will be displayed on the corresponding results page.
    GitHub Workflow
    • Automates the deployment of the application.
    • Ensures that the latest version is available on GitHub Pages.
